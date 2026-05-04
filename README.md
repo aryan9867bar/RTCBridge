@@ -1,12 +1,46 @@
-# CAMAVE — WebRTC Video Call App
+# RTCBridge — Real-Time Video Calling App
 
-## Fixes Applied
+RTCBridge is a full-stack real-time video calling application built using **WebRTC** and **WebSockets**. 
+It enables seamless peer-to-peer communication with low latency and reliable connectivity across networks 
+using STUN/TURN servers. The backend is built using **Spring Boot** and 
+the frontend uses **HTML**, **CSS**, **JavaScript**, along with **STOMP Client** and
+**SockJS** for WebSocket communication.
 
-1. **`MainController.java`** — Removed broken `htmlunit` import (`RTCSessionDescription` from htmlunit does not exist and caused a compile error).
-2. **`pom.xml`** — Removed the `htmlunit` dependency entirely (it was unused).
-3. **`WebSocketConfig.java`** — Changed `setAllowedOrigins(...)` to `setAllowedOriginPatterns("*")` so the server accepts connections from any host (not just the hardcoded IP).
-4. **`index.js`** — Changed the hardcoded `https://192.168.101.7:3000/websocket` URL to use `window.location.host` dynamically, so the frontend always connects to whichever host it's served from.
-5. **`index.js`** — Removed broken `testConnection.onclick` handler that referenced a DOM element (`#testConnection`) which doesn't exist in the HTML.
+---
+
+## Features
+
+- 🔴 One-to-one real-time video and audio communication
+- 🔌 WebSocket-based signaling using STOMP protocol
+- ⚡ Low-latency peer-to-peer streaming via WebRTC
+- 🌐 STUN/TURN integration for NAT traversal
+- 🎯 Dynamic client connection (no hardcoded IPs)
+- 💻 Responsive and interactive frontend UI
+
+---
+
+## Tech Stack
+
+### Backend
+- **Spring Boot** — REST APIs & WebSocket server
+- **WebSockets (STOMP)** — Signaling mechanism 
+- **WebRTC** — Peer-to-peer communication
+
+### 🎨 Frontend
+- **HTML, CSS, JavaScript** — UI
+- **SockJS + STOMP Client** — WebSocket communication
+
+---
+
+## System Design
+The application uses WebRTC for establishing peer-to-peer communication. A Spring Boot server acts as the signaling server 
+to exchange metadata between peers (SDP and ICE candidates) using WebSockets.
+
+**Diagram</h3>
+<p>Below is the system design diagram illustrating the flow of the application:</p>
+<img src="systemDesign.png" alt="System Design Diagram" style="max-width:100%; height:auto;">
+
+---
 
 ## How to Run
 
@@ -14,17 +48,23 @@
 - Java 17+
 - Maven 3.8+
 
+---
+
 ### Steps
 
 ```bash
-# 1. Navigate to project folder
-cd Video-Call-main
+# Clone repository
+git clone <your-repo-url>
 
-# 2. Build the project
-mvn clean package -DskipTests
+# Navigate to project
+cd Video-Call
 
-# 3. Run the server
-java -jar target/WebRTC-0.0.1-SNAPSHOT.jar
+# Build project
+./mvnw clean package -DskipTests
+
+# Run application
+java -jar target/webrtc-0.0.1-SNAPSHOT.jar
+
 ```
 
 ### Open in browser
@@ -57,3 +97,24 @@ keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 \
   -storetype PKCS12 -keystore src/main/resources/keystore.p12 \
   -validity 3650 -storepass Mandi@2226
 ```
+
+## How It Works
+
+1. **Signaling**
+    - The client connects to the Spring Boot WebSocket server
+    - Users exchange SDP (Session Description Protocol) and ICE (Interactive Connectivity Establishment) candidates via WebSockets
+
+2. **WebRTC Peer Connection**
+    - WebRTC APIs establish a direct peer-to-peer connection between users for audio and video streaming
+
+3. **Media Stream**
+    - Local media streams are captured using WebRTC and shared over the peer connection
+
+---
+
+## Contributing
+
+Contributions are welcome!  
+Feel free to fork the repository and submit a pull request with your changes 🚀
+
+---
