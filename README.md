@@ -1,10 +1,6 @@
 # RTCBridge — Real-Time Video Calling App
 
-RTCBridge is a full-stack real-time video calling application built using **WebRTC** and **WebSockets**. 
-It enables seamless peer-to-peer communication with low latency and reliable connectivity across networks 
-using STUN/TURN servers. The backend is built using **Spring Boot** and 
-the frontend uses **HTML**, **CSS**, **JavaScript**, along with **STOMP Client** and
-**SockJS** for WebSocket communication.
+RTCBridge is a full-stack real-time video calling application built using **WebRTC** and **WebSockets**. It enables seamless peer-to-peer communication with low latency and reliable connectivity across networks using STUN/TURN servers. The backend is built using **Spring Boot** and the frontend uses **HTML**, **CSS**, **JavaScript**, along with **STOMP Client** and **SockJS** for WebSocket communication.
 
 ---
 
@@ -33,11 +29,11 @@ the frontend uses **HTML**, **CSS**, **JavaScript**, along with **STOMP Client**
 ---
 
 ## System Design
-The application uses WebRTC for establishing peer-to-peer communication. A Spring Boot server acts as the signaling server 
-to exchange metadata between peers (SDP and ICE candidates) using WebSockets.
+The application uses WebRTC for establishing peer-to-peer communication. A Spring Boot server acts as the signaling server to exchange metadata between peers (SDP and ICE candidates) using WebSockets.
 
-**Diagram</h3>
-<p>Below is the system design diagram illustrating the flow of the application:</p>
+### Diagram
+Below is the system design diagram illustrating the flow of the application:
+
 <img src="systemDesign.png" alt="System Design Diagram" style="max-width:100%; height:auto;">
 
 ---
