@@ -26,7 +26,7 @@ the frontend uses **HTML**, **CSS**, **JavaScript**, along with **STOMP Client**
 - **WebSockets (STOMP)** — Signaling mechanism 
 - **WebRTC** — Peer-to-peer communication
 
-### 🎨 Frontend
+### Frontend
 - **HTML, CSS, JavaScript** — UI
 - **SockJS + STOMP Client** — WebSocket communication
 
