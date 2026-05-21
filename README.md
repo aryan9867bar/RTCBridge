@@ -40,17 +40,19 @@ Below is the system design diagram illustrating the flow of the application:
 
 ## How to Run
 
-### Prerequisites
+### Option 1 — Run with Maven (Local)
+
+#### Prerequisites
 - Java 17+
 - Maven 3.8+
 
 ---
 
-### Steps
+#### Steps
 
 ```bash
 # Clone repository
-git clone <your-repo-url>
+git clone https://github.com/aryan9867bar/RTCBridge
 
 # Navigate to project
 cd Video-Call
@@ -63,7 +65,7 @@ java -jar target/webrtc-0.0.1-SNAPSHOT.jar
 
 ```
 
-### Open in browser
+#### Open in browser
 
 The server runs on **HTTPS port 3000** (required for WebRTC camera access):
 
@@ -74,6 +76,37 @@ https://localhost:3000
 > ⚠️ Your browser will show a security warning for the self-signed certificate.
 > Click **"Advanced" → "Proceed to localhost"** to continue.
 
+---
+
+### Option 2 — Run with Docker
+
+#### Prerequisites
+- Install Docker from [docker.com](https://docker.com)
+
+#### Steps
+
+```bash
+# Clone repository
+git clone https://github.com/aryan9867bar/RTCBridge
+
+# Navigate to project
+cd Video-Call
+
+# Build the Docker image
+docker build -t video-call .
+
+# Run the container
+docker run -p 3000:3000 video-call
+```
+
+#### Open in browser
+
+```
+http://localhost:3000
+```
+
+---
+
 ### Testing two users locally
 
 Open two browser tabs/windows:
@@ -82,10 +115,43 @@ Open two browser tabs/windows:
 - In Tab 1, type `bob` in Remote ID and click Call
 - Accept in Tab 2
 
+---
+
+## Deploy on Render (Free)
+
+Render is the recommended platform for free cloud deployment. It supports Docker out of the box.
+
+### Steps
+
+1. Push your code to GitHub
+2. Go to [render.com](https://render.com) → Sign up → **New + → Web Service**
+3. Connect your GitHub repository
+4. Configure the service:
+
+| Field | Value |
+|---|---|
+| **Language** | `Docker` |
+| **Branch** | `main` |
+| **Region** | Singapore *(closest to South Asia)* |
+| **Instance Type** | Free |
+
+5. Click **"Create Web Service"** — Render auto-detects the `Dockerfile` and deploys
+
+Your app will be live at:
+```
+https://rtcbridge.onrender.com/
+```
+
+> 💡 Every `git push` to `main` triggers an automatic redeploy on Render.
+
+> ⚠️ Free tier spins down after 15 minutes of inactivity. First load after idle may take ~30 seconds.
+
+---
+
 ## SSL Certificate Note
 
 The keystore (`keystore.p12`) uses password `Mandi@2226` and alias `tomcat`.
-WebRTC *requires* HTTPS/secure context for camera/microphone access — do not remove SSL.
+WebRTC *requires* HTTPS/secure context for camera/microphone access — do not remove SSL when running locally.
 
 To generate a fresh self-signed cert:
 ```bash
