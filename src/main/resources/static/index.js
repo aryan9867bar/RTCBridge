@@ -103,7 +103,9 @@ connectBtn.onclick = () => {
   // Connect to Websocket Server
   console.log("Button Pressed");
   // var socket = new SockJS("https://13.61.10.86:3000/websocket", { debug: false });
-    var socket = new SockJS("https://" + window.location.host + "/websocket", { debug: false });
+//    var socket = new SockJS("https://" + window.location.host + "/websocket", { debug: false });
+    var socket = new SockJS(window.location.protocol + "//" + window.location.host + "/websocket", { debug: false });
+
 
   stompClient = Stomp.over(socket);
   localID = localIdInp.value;
